@@ -1,0 +1,10 @@
+{
+    "port": "1337",
+    "host": "localhost",
+    "version": "0",
+    "io": {
+      "auth": {
+        "namespace": "auth"
+      }
+    }
+}

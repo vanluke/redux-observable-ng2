@@ -2,6 +2,7 @@ require('babel-core/register');
 require('babel-polyfill');
 
 const path = require('path');
+
 process.env.TEST = true;
 
 const loaders = require('./webpack-config/loaders').default;
