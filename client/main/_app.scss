@@ -1,0 +1,20 @@
+.c-app {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: medium;
+  position: relative;
+  &__nav {
+    position: relative;
+    min-height: 4.75rem;
+  }
+  &__link {
+    text-decoration: none;
+    padding: 5%;
+    position: relative;
+    top: 50%;
+    display: inline-block;
+    transform: translate(0, -30%);
+    &--inline {
+      display: inline;
+    }
+  }
+}
