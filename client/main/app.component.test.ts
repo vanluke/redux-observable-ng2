@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { UserInfoComponent } from './user-info.component';
 
 describe('App component', () => {
   let fixture;
@@ -10,7 +11,7 @@ describe('App component', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, UserInfoComponent],
       imports: [RouterTestingModule.withRoutes([
         { path: '', component: AppComponent },
       ])],

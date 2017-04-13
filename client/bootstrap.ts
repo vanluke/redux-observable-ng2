@@ -9,6 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './main/app.component';
 import { AboutComponent } from './main/about.component';
+import { UserInfoComponent } from './main/user-info.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { AboutComponent } from './main/about.component';
   declarations: [
     AppComponent,
     AboutComponent,
+    UserInfoComponent,
   ],
   bootstrap: [AppComponent]
 })

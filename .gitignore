@@ -3,6 +3,7 @@ logs
 *.log
 .DS_Store
 firebase.config.ts
+server/auth/keys
 
 # Runtime data
 pids
