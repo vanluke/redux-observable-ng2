@@ -40,6 +40,6 @@ export class LoginComponent {
   }
 
   login(username: string, password: string) {
-    console.log(username, password);
+    this.close();
   }
 }
