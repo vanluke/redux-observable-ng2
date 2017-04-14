@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { ILoginUser } from './login-user.d';
 import './_login.scss';
 
 @Component({
@@ -34,12 +35,14 @@ import './_login.scss';
 })
 export class LoginComponent {
   @Output() onLoginClose = new EventEmitter();
+  @Output() onLogin = new EventEmitter<ILoginUser>();
 
   close() {
     this.onLoginClose.emit('close');
   }
 
-  login(username: string, password: string) {
+  login(name: string, password: string) {
+    this.onLogin.emit({ name, password });
     this.close();
   }
 }

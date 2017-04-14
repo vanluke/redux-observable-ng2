@@ -17,7 +17,7 @@ describe('Login component', () => {
   });
   it('should create component', () => expect(component).toBeDefined() );
   it('should handle close', () => {
-   spyOn(component.onLoginClose, 'emit');
+    spyOn(component.onLoginClose, 'emit');
     const element = fixture.nativeElement.querySelector('.c-login__close');
     element.dispatchEvent(new Event('click'));
     
@@ -33,6 +33,15 @@ describe('Login component', () => {
     fixture.detectChanges();
 
     expect(component.login).toHaveBeenCalled();
+  });
+   it('should emit onLogin', () => {
+    spyOn(component.onLogin, 'emit').and.callThrough();
+    const element = fixture.nativeElement.querySelector('.c-login__button');
+    element.dispatchEvent(new Event('click'));
+    
+    fixture.detectChanges();
+
+    expect(component.onLogin.emit).toHaveBeenCalled();
   });
   it('should handle login and close modal', () => {
     spyOn(component, 'login').and.callThrough();
