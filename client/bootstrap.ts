@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './main/app.component';
 import { AboutComponent } from './main/about.component';
 import { UserInfoComponent } from './main/user-info.component';
+import { LoginComponent } from './auth/login.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { UserInfoComponent } from './main/user-info.component';
     AppComponent,
     AboutComponent,
     UserInfoComponent,
+    LoginComponent,
   ],
   bootstrap: [AppComponent]
 })

@@ -13,7 +13,7 @@ export async function loginRoute(ctx, next, data) {
     ...claims,
     iat: Math.floor(Date.now() / 1000) - 30 },
     getPrivateKey(),
-    { expiresIn: '1h',
+    { expiresIn: '1d',
   });
 
   ctx.response.status = 200;

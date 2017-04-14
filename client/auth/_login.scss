@@ -1,0 +1,122 @@
+$login-icon-bg-color: #ff9900;
+$login-icon-color: #fff;
+$login-bg-color: #fff;
+$login-input-focus-color: #ddd;
+$login-input-border-color: #ddd;
+$login-label-color: #fff;
+$login-label-bg-color: #ff9900;
+$login-button-bg-color: #ff9900;
+$login-button-color: #fff;
+
+.c-login {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 170vh;
+  background: $login-bg-color;
+  transform: translate(0, -5%);
+
+  &__close-svg {
+    vertical-align: top;
+    fill: #fff;
+    &:hover {
+      fill: rgba(0, 0, 0, .3);
+    }
+  }
+
+  &__close {
+    width: 2.5rem;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    top: 6%;
+    float: right;
+    background: rgba(0, 0, 0, .3);
+    border-radius: 50%;
+    right: 1%;
+
+    &:hover {
+      background: rgba(255, 255, 255, .5);
+    }
+
+    &::after {
+      content: '';
+      clear: both;
+      display: block;
+    }
+  }
+
+  &__button {
+    width: 80%;
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1.5%;
+    font-size: 130%;
+    border: none;
+    background: $login-button-bg-color;
+    color: $login-button-color;
+  }
+
+  &__form {
+    position: relative;
+    overflow: auto;
+    top: 25%;
+    text-align: center;
+    left: 25%;
+    transform: translate(-21%, -20%);
+  }
+
+  &__group {
+    
+  }
+
+  &__label {
+    position: absolute;
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    color: $login-label-color;
+    background: $login-label-bg-color;
+    font-size: 1.25rem;
+  }
+
+  &__input-text {
+    left: 0;
+    width: 100%;
+    height: 3rem;
+    padding-left: 4rem;
+    padding-right: .9rem;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    box-sizing: border-box;
+    
+    border-color: $login-input-border-color;
+    border-width: .06rem;
+    border-style: solid;
+    
+    transition: background .25s;
+    
+    &:hover,
+    &:focus {
+      outline: none;
+      background: $login-input-focus-color;
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    text-align: center;
+    line-height: 3rem;
+    color: $login-icon-color;
+    background-color: $login-icon-bg-color;
+    font-size: 1.2rem;
+  }
+}

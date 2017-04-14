@@ -37,4 +37,5 @@ export class AppComponent implements OnInit {
   }
 
   user: IUser;
+  isLoginVisible: boolean = false;
 }
