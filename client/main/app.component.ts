@@ -1,5 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  ChangeDetectionStrategy, 
+  ChangeDetectorRef, 
+} from '@angular/core';
 import { IUser } from './user.d';
+import { ILoginUser } from '../auth/login-user.d';
 import './_app.scss';
 
 @Component({
@@ -8,28 +14,47 @@ import './_app.scss';
     <nav class="c-app__nav">
       <a [routerLink]="['/']" class="c-app__link">Home</a>
       <user-info *ngIf="isAuthenticated()" 
-        [user]="user" 
+        [user]="user"
         (logout)="logout()">
       </user-info>
+      <a 
+        class="c-app__link" 
+        (click)="openLogin()" 
+        *ngIf="!isAuthenticated()"
+      >Login
+      </a>
     </nav>
+    <login
+      *ngIf="isLoginVisible"
+      (onLogin)="login($event)"
+      (onLoginClose)="logout($event)"
+    >
+    </login>
     <router-outlet></router-outlet>
   </div>`,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
-    setTimeout(() => {
-      this.user = <IUser>{
-        name: 'John',
-        surname: 'Doe',
-        avatar: 'http://wfarm3.dataknet.com/static/resources/icons/set3/c9f1cdf48670.png',
-      }
-    }, 1000);
+    // TODO: Connect to redux
   }
   
+  openLogin() {
+    this.isLoginVisible = true;
+  }
+
+  login({ name, password }: ILoginUser) {
+    // TODO: Connect to redux
+   // this.isLoginVisible = false;
+
+    // this.cd.detectChanges();
+  }
+
   logout() {
-    this.user = undefined;
+    // TODO: Connect to redux
+   // this.isLoginVisible = false;
   }
 
   isAuthenticated() {
@@ -37,4 +62,5 @@ export class AppComponent implements OnInit {
   }
 
   user: IUser;
+  isLoginVisible: boolean = false;
 }

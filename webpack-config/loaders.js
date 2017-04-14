@@ -4,7 +4,7 @@ const makeFileLoader = function (args) {
       return {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'url',
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'application/font-woff',
@@ -15,7 +15,7 @@ const makeFileLoader = function (args) {
       return {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'url',
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'application/octet-stream',
@@ -26,7 +26,7 @@ const makeFileLoader = function (args) {
       return {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'url',
+          loader: 'url-loader',
           options: {
             limit: 10000,
             mimetype: 'image/svg+xml',
@@ -37,7 +37,7 @@ const makeFileLoader = function (args) {
       return {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
         use: [{
-          loader: 'file',
+          loader: 'file-loader',
         }],
       };
     case 'jpg':
@@ -90,6 +90,16 @@ export const sass = {
   ],
 };
 
+
+export const css = {
+  test: /\.css/,
+  use: [
+    'style-loader',
+    'css-loader',
+    'postcss-loader',
+  ],
+};
+
 export const json = {
   test: /\.json/,
   exclude: /node_modules/,
@@ -110,6 +120,6 @@ export const woffLoader = makeFileLoader('woff');
 export const ttfLoader = makeFileLoader('ttf');
 export const jpgLoader = makeFileLoader('jpg');
 
-export default [tslint, ts, js, json, sass,
+export default [tslint, ts, js, json, css, sass,
   svgLoader, eotLoader, woffLoader,
   ttfLoader, jpgLoader];
