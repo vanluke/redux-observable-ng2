@@ -65,15 +65,17 @@ module.exports = function (config) {
           'node_modules',
         ],
       },
+      stats: {
+        colors: true,
+        timings: true,
+        errorDetails: true,
+      },
       module: {
         rules: loaders,
       },
     },
-    webpackMiddleware: {
-      stats: 'errors-only'
-    },
     webpackServer: {
-      noInfo: true
+      noInfo: true,
     },
     reporters: ['spec', 'coverage-istanbul'].concat(coverage),
     port: 9876,
@@ -81,7 +83,7 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     captureTimeout: 6000,
     autoWatch: true,
-    browsers: ['PhantomJS'],// Chrome', 'Firefox'], // Alternatively: 'PhantomJS'
+    browsers: ['Chrome'],// Chrome', 'Firefox'], // Alternatively: 'PhantomJS'
     singleRun: false
   });
 };

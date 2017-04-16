@@ -1,10 +1,15 @@
 import { 
   Component, 
   OnInit, 
-  ChangeDetectionStrategy, 
-  ChangeDetectorRef, 
+  ChangeDetectionStrategy,
+  Inject,
 } from '@angular/core';
 import { IUser } from './user.d';
+import {
+  loginToggleModal,
+  login,
+  logout,
+} from '../auth/action-creators';
 import { ILoginUser } from '../auth/login-user.d';
 import './_app.scss';
 
@@ -19,15 +24,15 @@ import './_app.scss';
       </user-info>
       <a 
         class="c-app__link" 
-        (click)="openLogin()" 
+        (click)="openLogin($event)" 
         *ngIf="!isAuthenticated()"
       >Login
       </a>
     </nav>
     <login
-      *ngIf="isLoginVisible"
+      *ngIf="isLoginModalVisible"
       (onLogin)="login($event)"
-      (onLoginClose)="logout($event)"
+      (onLoginClose)="closeLogin($event)"
     >
     </login>
     <router-outlet></router-outlet>
@@ -35,26 +40,41 @@ import './_app.scss';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(@Inject('store') private store) {}
 
   ngOnInit() {
-    // TODO: Connect to redux
+    this.storeSubscription = this.store && this.store.subscribe(() => {
+      const { loginReducer } = this.store.getState();
+      this.isLoading = loginReducer.isLoading;
+      this.isLoginModalVisible = loginReducer.isLoginModalVisible;
+      this.user = loginReducer.user;
+      this.error = loginReducer.error;
+    });
   }
   
-  openLogin() {
-    this.isLoginVisible = true;
+  toggleModalLogin() {
+    const { dispatch } = this.store;
+    dispatch(loginToggleModal());
   }
 
-  login({ name, password }: ILoginUser) {
-    // TODO: Connect to redux
-   // this.isLoginVisible = false;
+  openLogin($event) {
+    $event.preventDefault();
+    this.toggleModalLogin();
+  }
 
-    // this.cd.detectChanges();
+  login(userLoginData: ILoginUser) {
+    const { dispatch } = this.store;
+    dispatch(login(userLoginData));
+  }
+
+  closeLogin() {
+     this.toggleModalLogin();
   }
 
   logout() {
-    // TODO: Connect to redux
-   // this.isLoginVisible = false;
+    const { dispatch } = this.store;
+    dispatch(logout());
+    this.toggleModalLogin();
   }
 
   isAuthenticated() {
@@ -62,5 +82,9 @@ export class AppComponent implements OnInit {
   }
 
   user: IUser;
-  isLoginVisible: boolean = false;
+  isLoading: boolean = false;
+  token: any;
+  error: any;
+  isLoginModalVisible: boolean = false;
+  storeSubscription: Function;
 }

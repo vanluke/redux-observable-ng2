@@ -5,6 +5,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { UserInfoComponent } from './user-info.component';
 import { LoginComponent } from '../auth/login.component';
+import {
+  loginToggleModal,
+  login,
+  logout,
+} from '../auth/action-creators';
+import configureMockStore from 'redux-mock-store';
+import { ILoginUser } from '../auth/login-user.d';
+import { createEpicMiddleware } from 'redux-observable';
+import { loginEpic } from '../auth/epics';
+
+const epicMiddleware = createEpicMiddleware(loginEpic);
+const mockStore = () => configureMockStore([epicMiddleware]);
 
 describe('App component', () => {
   let fixture;
@@ -16,6 +28,15 @@ describe('App component', () => {
       imports: [RouterTestingModule.withRoutes([
         { path: '', component: AppComponent },
       ])],
+      providers: [
+        { provide: 'store', useValue: {
+          getState: () => {
+            return { loginReducer: {}, };
+          },
+          subscribe: () => {},
+          dispatch: () => {},
+        } },
+      ]
     });
     fixture = TestBed.createComponent(AppComponent);
 
@@ -34,5 +55,44 @@ describe('App component', () => {
     fixture.detectChanges();
 
     expect(component.openLogin).toHaveBeenCalled();
+  });
+
+  it('should store be defined', () => expect(component.store).toBeDefined());
+
+  it('should dispatch logout', () => {
+    spyOn(component.store, 'dispatch');
+    component.logout();
+    expect(component.store.dispatch).toHaveBeenCalledWith(logout());
+  });
+
+  it('should have called toggleModalLogin', () => {
+    spyOn(component, 'toggleModalLogin');
+    component.logout();
+    expect(component.toggleModalLogin).toHaveBeenCalled();
+  });
+
+  it('should closeLogin called toggleModalLogin', () => {
+    spyOn(component, 'toggleModalLogin');
+    component.closeLogin();
+    expect(component.toggleModalLogin).toHaveBeenCalled();
+  });
+
+  it('should login dispatch login', () => {
+    spyOn(component.store, 'dispatch');
+    const expected = { name: 'John', password: 'doe' };
+    component.login(expected);
+    expect(component.store.dispatch).toHaveBeenCalledWith(login(expected));
+  });
+
+  it('should openLogin call toggleModalLogin ', () => {
+    spyOn(component, 'toggleModalLogin');
+    component.openLogin(new Event('click'));
+    expect(component.toggleModalLogin).toHaveBeenCalled();
+  });
+
+  it('should toggleModalLogin dispatch toggleModalLogin', () => {
+    spyOn(component.store, 'dispatch');
+    component.toggleModalLogin();
+    expect(component.store.dispatch).toHaveBeenCalledWith(loginToggleModal());
   });
 });

@@ -11,6 +11,7 @@ import { AppComponent } from './main/app.component';
 import { AboutComponent } from './main/about.component';
 import { UserInfoComponent } from './main/user-info.component';
 import { LoginComponent } from './auth/login.component';
+import configureStore from './store/store';
 
 @NgModule({
   imports: [
@@ -28,6 +29,9 @@ import { LoginComponent } from './auth/login.component';
     AboutComponent,
     UserInfoComponent,
     LoginComponent,
+  ],
+  providers: [
+    { provide: 'store', useValue: configureStore() },
   ],
   bootstrap: [AppComponent]
 })
