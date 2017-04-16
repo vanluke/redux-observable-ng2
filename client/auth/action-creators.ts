@@ -5,6 +5,7 @@ import {
   LOGOUT,
   LOGOUT_SUCCESS,
   LOGOUT_FAILS,
+  LOGIN_TOGGLE,
 } from './consts';
 
 export const login = ({ name, password }) => ({
@@ -29,7 +30,7 @@ export const loginFails = response => ({
   },
 });
 
-export const logout = response => ({
+export const logout = () => ({
   type: LOGOUT,
 });
 
@@ -45,4 +46,8 @@ export const logoutFails = response => ({
   payload: {
     ...response,
   },
+});
+
+export const loginToggleModal = () => ({
+  type: LOGIN_TOGGLE,
 });
