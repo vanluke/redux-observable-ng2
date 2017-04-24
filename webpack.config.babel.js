@@ -25,7 +25,7 @@ export default {
     stats: {
       colors: true,
       timings: true,
-      'errors-only': true
+      'errors-only': true,
     },
     hot: true,
     historyApiFallback: true,
