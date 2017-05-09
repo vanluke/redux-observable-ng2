@@ -1,0 +1,12 @@
+{
+  "extends": "tslint-config-airbnb",
+  "rulesDirectory": [
+    "node_modules/codelyzer"
+  ],
+  "rules": {
+    "indent": ["error", 2],
+    "max-line-length": [true, 80],
+    "quotemark": [true, "single"],
+    "eofline": false
+  }
+}

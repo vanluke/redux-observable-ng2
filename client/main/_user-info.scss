@@ -1,0 +1,81 @@
+.c-user-info {
+  display: inline;
+  &--desktop {
+    display: none;
+    @media screen and (min-width: 40rem) {
+      display: block;
+    }
+  }
+  &--mobile {
+    display: block;
+    @media screen and (min-width: 40rem) {
+      display: none;
+    }
+  }
+  @media screen and (min-width: 40rem) {
+    position: relative;
+    float: right;
+    overflow: visible;
+
+    &::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+
+  &__title {
+    @media screen and (min-width: 40rem) {
+      display: inline-block;
+      overflow: auto;
+    }
+  }
+
+  &__avatar {
+    @media screen and (min-width: 40rem) {
+      position: absolute;
+      width: 100%;
+      top: -0.5rem;
+    }
+  }
+
+  &__avatar-container {
+    @media screen and (min-width: 40rem) {
+      display: inline-block;
+      position: relative;
+      min-width: 3rem;
+      min-height: 3rem;
+    }
+  }
+
+  &__dropdown {
+    @media screen and (min-width: 40rem) {
+      display: none;
+      list-style: none;
+    }
+  }
+
+  &__arrow-label {
+    @media screen and (min-width: 40rem) {
+      border: solid #000;
+      border-width: 0 .2rem .2rem 0;
+      display: inline-block;
+      padding: .20rem;
+      transform: rotate(45deg);
+      position: relative;
+      vertical-align: top;
+      top: 1.75rem;
+    }
+  }
+
+  &__arrow {
+    display: none;
+    &:checked ~ .c-user-info__arrow-label {
+      border: solid red;
+      border-width: 0 .2rem .2rem 0;
+    }
+    &:checked ~ .c-user-info__dropdown {
+      display: block;
+    }
+  }
+}
