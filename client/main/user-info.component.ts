@@ -25,8 +25,8 @@ import './_user-info.scss';
         class="c-user-info__arrow-label">
       </label>
       <ul class="c-user-info__dropdown">
-        <li><a class="c-user-info__link">Settings</a></li>
-        <li><a class="c-user-info__link" (click)="onLogout()">Log Out</a></li>
+        <li><a class="c-app__link">Settings</a></li>
+        <li><a class="c-app__link" (click)="onLogout()">Log Out</a></li>
       </ul>
     </nav>
     <nav class="c-user-info c-user-info--mobile">

@@ -10,8 +10,8 @@
     "experimentalDecorators": true,
     "noImplicitAny": false,
     "removeComments": false,
-    "sourceMap": false,
-    "inlineSourceMap": true,
+    "sourceMap": true,
+    "inlineSourceMap": false,
     "noEmitHelpers": true,
     "typeRoots": [
       "node_modules/@types"

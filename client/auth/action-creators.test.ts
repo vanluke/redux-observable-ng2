@@ -25,7 +25,7 @@ describe('Auth action creators', () => {
       type: LOGIN,
       payload: {
         ...user,
-      }
+      },
     }));
   });
 
@@ -36,7 +36,7 @@ describe('Auth action creators', () => {
       type: LOGIN_SUCCESS,
       payload: {
         ...response,
-      }
+      },
     }));
   });
 
@@ -47,7 +47,7 @@ describe('Auth action creators', () => {
       type: LOGIN_FAILS,
       payload: {
         ...response,
-      }
+      },
     }));
   });
 

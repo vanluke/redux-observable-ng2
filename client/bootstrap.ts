@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   HttpModule,
@@ -11,7 +11,7 @@ import { AppComponent } from './main/app.component';
 import { AboutComponent } from './main/about.component';
 import { UserInfoComponent } from './main/user-info.component';
 import { LoginComponent } from './auth/login.component';
-import configureStore from './store/store';
+import store from './store/store';
 
 @NgModule({
   imports: [
@@ -31,9 +31,9 @@ import configureStore from './store/store';
     LoginComponent,
   ],
   providers: [
-    { provide: 'store', useValue: configureStore() },
+    { provide: 'store', useValue: store() },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 class AppModule {}
 

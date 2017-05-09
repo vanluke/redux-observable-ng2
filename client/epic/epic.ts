@@ -4,5 +4,5 @@ import {
 import { combineEpics, Epic } from 'redux-observable';
 
 export default combineEpics(
-  loginEpic,
+  loginEpic as Epic<{}, {}>,
 ) as Epic<{}, {}>;

@@ -1,0 +1,5 @@
+{
+  "auth": {
+    "authUrl": "http://localhost:1337/login"
+  }
+}

@@ -10,13 +10,19 @@ import {
   login,
   logout,
 } from '../auth/action-creators';
-import configureMockStore from 'redux-mock-store';
+import reduxMockStore from 'redux-mock-store';
+import { combineEpics, Epic } from 'redux-observable';
 import { ILoginUser } from '../auth/login-user.d';
 import { createEpicMiddleware } from 'redux-observable';
 import { loginEpic } from '../auth/epics';
 
-const epicMiddleware = createEpicMiddleware(loginEpic);
-const mockStore = () => configureMockStore([epicMiddleware]);
+const epics = combineEpics(loginEpic) as Epic<{}, {}>;
+const epicMiddleware = createEpicMiddleware(epics, {
+  dependencies: {
+  },
+});
+
+const mockStore = () => reduxMockStore([epicMiddleware]);
 
 describe('App component', () => {
   let fixture;
@@ -31,12 +37,12 @@ describe('App component', () => {
       providers: [
         { provide: 'store', useValue: {
           getState: () => {
-            return { loginReducer: {}, };
+            return { loginReducer: {} };
           },
           subscribe: () => {},
           dispatch: () => {},
         } },
-      ]
+      ],
     });
     fixture = TestBed.createComponent(AppComponent);
 

@@ -30,6 +30,19 @@ export default [
       postcss: [precss, autoprefixer],
     },
   }),
+  new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+    },
+  }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'vendors',
+  //   minChunks: Infinity,
+  // }),
+  // new webpack.optimize.CommonsChunkPlugin({
+  //   name: 'manifest',
+  //   minChunks: Infinity,
+  // }),
   new ExtractTextPlugin({
     filename: 'bundle.css',
     disable: false,
