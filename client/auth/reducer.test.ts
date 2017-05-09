@@ -55,7 +55,7 @@ describe('Auth reducer', () => {
   });
 
   it('should handle LOGOUT', () => {
-    const action = { type: LOGOUT };
+    const action = { type: LOGOUT, payload: {} };
     const actual = loginReducer(initState, action);
     expect(actual).toEqual(jasmine.objectContaining({
       isLoading: false,
@@ -65,7 +65,7 @@ describe('Auth reducer', () => {
   });
 
   it('should handle initState', () => {
-    const action = { type: '@redux/init' };
+    const action = { type: '@redux/init', payload: {} };
     const actual = loginReducer(initState, action);
     expect(actual).toEqual(jasmine.objectContaining({
       ...initState,

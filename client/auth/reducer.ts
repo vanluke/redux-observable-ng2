@@ -20,7 +20,7 @@ export const initState = Immutable({
 
 export interface IAction {
   type: string;
-  payload?: any;
+  payload: any;
 }
 
 export const initAction = <IAction>{
@@ -28,27 +28,22 @@ export const initAction = <IAction>{
   payload: {},
 };
 
-export const loginReducer = 
-  (state = initState, action: IAction = initAction) => {
-  switch (action.type) {
-    case LOGIN:
-      return state.set('isLoading', true);
-    case LOGIN_SUCCESS:
-    debugger;
-      return state
-        .set('isLoading', false)
-        .set('token', action.payload.token)
-        .set('user', action.payload.user);
-    case LOGIN_FAILS:
-      return state
-        .set('isLoading', false)
-        .set('error', action.payload.error);
-    case LOGOUT:
-      return state
-        .set('token', undefined)
-        .set('user', undefined);
-    case LOGIN_TOGGLE:
-      return state.set('isLoginModalVisible', !state.isLoginModalVisible);
-    default: return state;
-  }
-};
+export const loginReducer = (
+  state = initState, 
+  action: IAction = initAction) => (({
+      [LOGIN]: state => state.set('isLoading', true),
+      [LOGIN_SUCCESS]: (state, { payload }) => state
+            .set('isLoading', false)
+            .set('token', payload.token)
+            .set('user', payload.user),
+      [LOGIN_FAILS]: (state, { payload }) => state
+            .set('isLoading', false)
+            .set('error', payload.error),
+      [LOGOUT]: state => state
+            .set('token', undefined)
+            .set('user', undefined),
+      [LOGIN_TOGGLE]: state => state
+            .set('isLoginModalVisible', !state.isLoginModalVisible),
+    }[action.type])
+      || function (s) { return s; })
+    (state, action);

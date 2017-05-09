@@ -8,14 +8,11 @@ import listen from './listen';
 import routes from '../routes';
 import secure from '../auth';
 import attach from './io-app';
-import tokenIO from '../auth/socket';
 
 const version = config.get('version');
 const endpoint = `/api/v${version}`;
 
 attach(app);
-
-// tokenIO(app._io);
 
 app.use(json());
 app.use(cors());

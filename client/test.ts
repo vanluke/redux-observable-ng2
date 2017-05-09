@@ -14,28 +14,8 @@ import {
   platformBrowserDynamicTesting,
 } from '@angular/platform-browser-dynamic/testing';
 
-declare var __karma__: any;
-declare var require: any;
-
-// const mock = () => {
-//   let storage = {};
-//   return {
-//     getItem: key => key in storage ? storage[key] : null,
-//     setItem: (key, value) => storage[key] = value || '',
-//     removeItem: key => delete storage[key],
-//     clear: () => storage = {},
-//   };
-// };
-
-// Object.defineProperty(window, 'localStorage', {
-//   value: mock(),
-// });
-// Object.defineProperty(window, 'sessionStorage', {
-//   value: mock(),
-// });
-// Object.defineProperty(window, 'getComputedStyle', {
-//   value: () => ['-webkit-appearance'],
-// });
+declare const __karma__: any;
+declare const require: any;
 
 __karma__.loaded = function () {};
 

@@ -45,6 +45,6 @@ const config = convict({
 
 const env = config.get('env');
 config.loadFile(`./server/config/${env}.json`);
-config.validate({ strict: true });
+config.validate({ allowed: 'strict' });
 
 export default config;

@@ -2,6 +2,7 @@ import {
   Component, 
   OnInit, 
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Inject,
 } from '@angular/core';
 import { IUser } from './user.d';
@@ -40,7 +41,9 @@ import './_app.scss';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject('store') private store) {}
+  constructor(
+    @Inject('store') private store, 
+    private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.storeSubscription = this.store && this.store.subscribe(() => {
@@ -49,6 +52,7 @@ export class AppComponent implements OnInit {
       this.isLoginModalVisible = loginReducer.isLoginModalVisible;
       this.user = loginReducer.user;
       this.error = loginReducer.error;
+      this.cd.detectChanges();
     });
   }
   

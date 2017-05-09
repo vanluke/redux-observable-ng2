@@ -17,6 +17,7 @@ describe('UserInfo component', () => {
     component.user = {
       name: 'John',
       surname: 'Doe',
+      // tslint:disable-next-line
       avatar: 'http://wfarm3.dataknet.com/static/resources/icons/set3/c9f1cdf48670.png',
     };
 
@@ -24,7 +25,9 @@ describe('UserInfo component', () => {
   });
   it('should create component', () => expect(component).toBeDefined() );
   it('should render user name', () => {
-    const elements = fixture.debugElement.query(By.css('.c-user-info__header'));
+    const elements = fixture
+      .debugElement
+      .query(By.css('.c-user-info__header'));
     const actual = elements.nativeElement.textContent;
     const expected = 'John';
     expect(actual).toEqual(expected);
@@ -32,7 +35,9 @@ describe('UserInfo component', () => {
 
   it('should handle logout', () => {
     spyOn(component.logout, 'emit');
-    const elements = fixture.nativeElement.querySelectorAll('.c-user-info__link');
+    const elements = fixture
+      .nativeElement
+      .querySelectorAll('.c-user-info__link');
 
     const link = elements[1];
     link.dispatchEvent(new Event('click'));
@@ -44,7 +49,9 @@ describe('UserInfo component', () => {
 
   it('should handle logout on mobile', () => {
     spyOn(component.logout, 'emit');
-    const elements = fixture.nativeElement.querySelectorAll('.c-app__link--inline');
+    const elements = fixture
+      .nativeElement
+      .querySelectorAll('.c-app__link--inline');
     
     const link = elements[1];
     link.dispatchEvent(new Event('click'));

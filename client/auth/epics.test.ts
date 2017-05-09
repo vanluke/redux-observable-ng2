@@ -35,18 +35,18 @@ describe('loginEpic Epic', () => {
       imports: [HttpModule],
       providers: [
         { provide: XHRBackend, useClass: MockBackend },
-        AuthService​​],
+        AuthService],
     });
   });
   it('should dispatch LOGIN_SUCCESS', inject([AuthService, XHRBackend], 
     (authService, mockBackend) => {
       mockBackend.connections.subscribe((connection) => {
           connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(response)
+            body: JSON.stringify(response.token),
           })));
         });
       const expectedOutputActions = [{ type: LOGIN }, { type: LOGIN_SUCCESS }];
-    
+      spyOn(authService, 'resolveToken').and.returnValue(response.user);
       epics.loginEpic(action$, undefined, { authService })
         .toArray()
         .subscribe((resp) => {
@@ -57,11 +57,11 @@ describe('loginEpic Epic', () => {
     (authService, mockBackend) => {
       mockBackend.connections.subscribe((connection) => {
           connection.mockRespond(new Response(new ResponseOptions({
-            body: JSON.stringify(response)
+            body: JSON.stringify(response.token),
           })));
         });
       const expectedOutputActions = [{ type: LOGIN }, { type: LOGIN_SUCCESS }];
-    
+      spyOn(authService, 'resolveToken').and.returnValue(response.user);
       epics.loginEpic(action$, undefined, { authService })
         .toArray()
         .subscribe((resp) => {

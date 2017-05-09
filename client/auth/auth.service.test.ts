@@ -17,37 +17,34 @@ const authResponse = require('./auth.response.mock.json');
 
 describe('Auth service', () => {
   const response = { ...authResponse };
-  // let injector;
-  // let service;
-  // let mockBackend;
+  const config = {
+    auth: {
+      authUrl: '',
+    },
+  };
   beforeEach(() => {
     TestBed.configureTestingModule({
      imports: [HttpModule],
       providers: [
-      { provide: XHRBackend, useClass: MockBackend },
-      AuthService,
+        { provide: 'config', useValue: config },
+        { provide: XHRBackend, useClass: MockBackend },
+        AuthService,
       ],
     });
-   // injector = getTestBed();
   });
-
-  // beforeEach(() => {
-  //   mockBackend = injector.get(XHRBackend);
-  //   service = injector.get(AuthService);
-  // });
-
   it('should get token', 
     inject([AuthService, XHRBackend], (authService, xhrBackend) => {
     xhrBackend.connections.subscribe((connection) => {
       connection.mockRespond(new Response(new ResponseOptions({
-        body: JSON.stringify(response),
+        body: JSON.stringify(response.token),
       })));
     });
+    spyOn(authService, 'resolveToken').and.returnValue(response.user);
     authService.authenticate('John', 'abc123').subscribe((resp) => {
       expect(resp).toBeDefined();
       expect(resp).toEqual(jasmine.objectContaining({
         user: {
-          name: 'John',
+          name: 'John Doe',
         },
       }));
       expect(resp).toEqual(jasmine.objectContaining({

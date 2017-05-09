@@ -56,8 +56,12 @@ describe('Login component', () => {
   });
   it('should handle username and password', () => {
     spyOn(component, 'login').and.callThrough();
-    const password = fixture.debugElement.query(By.css('input[type="password"]'));
-    const username = fixture.debugElement.query(By.css('input[type="text"]'));
+    const password = fixture
+      .debugElement
+      .query(By.css('input[type="password"]'));
+    const username = fixture
+      .debugElement
+      .query(By.css('input[type="text"]'));
 
     username.nativeElement.value = 'John';
     username.nativeElement.dispatchEvent(new Event('input'));
@@ -65,7 +69,9 @@ describe('Login component', () => {
     password.nativeElement.value = 'password';
     password.nativeElement.dispatchEvent(new Event('input'));
 
-    const element = fixture.nativeElement.querySelector('.c-login__button');
+    const element = fixture
+      .nativeElement
+      .querySelector('.c-login__button');
     element.dispatchEvent(new Event('click'));
 
     expect(component.login).toHaveBeenCalledWith('John', 'password');
